@@ -33,7 +33,7 @@ jobs:
         run: |
           chmod +x ./shiftleft
           git clone https://github.com/chkp-rolandop/demo-app
-          ./shiftleft code-scan -sevt 4 -s .
+          ./shiftleft code-scan -s .
 
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
