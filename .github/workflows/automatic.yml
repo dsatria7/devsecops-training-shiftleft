@@ -25,8 +25,17 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      # Runs a single command using the runners shell
-      - name:   build-image:
+      # Runs shiftleft source code scan on demo-app repo
+      - name: Run ShiftLeft Source Code Scan
+        env: 
+          CHKP_CLOUDGUARD_ID: ${{ secrets.CHKP_CLOUDGUARD_ID }}
+          CHKP_CLOUDGUARD_SECRET: ${{ secrets.CHKP_CLOUDGUARD_SECRET }}
+        run: |
+          chmod +x ./shiftleft
+          git clone https://github.com/chkp-rolandop/demo-app
+          ./shiftleft code-scan -s .
+
+  build-image:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
