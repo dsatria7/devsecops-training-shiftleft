@@ -26,14 +26,20 @@ jobs:
       - uses: actions/checkout@v2
 
       # Runs a single command using the runners shell
-      - name: Run ShiftLeft Source Code Scan
+      - name:   build-image:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build Container Image
         env: 
           CHKP_CLOUDGUARD_ID: ${{ secrets.CHKP_CLOUDGUARD_ID }}
           CHKP_CLOUDGUARD_SECRET: ${{ secrets.CHKP_CLOUDGUARD_SECRET }}
         run: |
+          git clone https://github.com/chkp-rolandop/demo-app
+          docker build -t rolandopcp/myapp ./demo-app
+          docker save -o myapp.tar rolandopcp/myapp
           chmod +x ./shiftleft
-          git clone https://github.com/dsatria7/devsecops-training-shiftleft.git
-          ./shiftleft code-scan -s .
+          ./shiftleft image-scan -i myapp.tar
 
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
