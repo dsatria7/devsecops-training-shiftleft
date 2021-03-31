@@ -32,7 +32,7 @@ jobs:
           CHKP_CLOUDGUARD_SECRET: ${{ secrets.CHKP_CLOUDGUARD_SECRET }}
         run: |
           chmod +x ./shiftleft
-          git clone https://github.com/chkp-rolandop/demo-app
+          git clone https://github.com/dsatria7/devsecops-training-shiftleft.git
           ./shiftleft code-scan -s .
 
       # Runs a set of commands using the runners shell
